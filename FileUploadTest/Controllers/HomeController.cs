@@ -18,9 +18,15 @@ namespace FileUploadTest.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]    
+        public IActionResult Upload(FileUploadRequest request)
         {
-            return View();
+            if (!ModelState.IsValid) return this.Error();
+
+            // do stuff with request.File here
+
+
+            return this.Ok(request.File.FileName);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

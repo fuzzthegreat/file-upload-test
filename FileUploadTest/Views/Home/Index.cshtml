@@ -3,6 +3,37 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Upload</h1>
+    <p>Upload Test</p>
 </div>
+
+    <input type="file" name="upload" id="importFile"/>
+    <button class="btn btn-primary" id="btnUpload">Upload</button>
+
+
+
+@section Scripts {
+    <script>  
+  
+        $(document).on("click", "#btnUpload", function () {  
+            var files = $("#importFile").get(0).files;  
+  
+            var formData = new FormData();  
+            formData.append('file', files[0]);  
+  
+            $.ajax({  
+                url: '/Home/Upload',  
+                data: formData,  
+                type: 'POST',  
+                contentType: false,  
+                processData: false,  
+                success: function (data) {  
+                   console.log('upload to server succeeded', data); 
+                },
+                error: function(err) {
+                    console.log('upload failed!', error);
+                }
+            });  
+        });  
+   </script> 
+}
